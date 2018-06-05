@@ -14,23 +14,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $name = $_POST['name'];	  //輸入的點卷名稱
     $price = $_POST['price']; //輸入的所需點數
 
-	/*if (count($price) == 1)
-	{
-		echo("請輸入正確的數字");
-	}
-	*/
+	//=========取得查詢結果筆數=======
+	$sql="SELECT * FROM products";	
+	$result=$db->query($sql);
+	$num = $result->rowCount();
+	$num +=1;
+	//================================
 	
-	$sql = $db->query("INSERT INTO products(name, price) VALUES('$name', '$price')"); //新增此資料
+	//==========新增點卷==============
+	$sql = $db->query("INSERT INTO products(id, name, price) VALUES('$num', '$name', '$price')"); //新增此資料
 	$sql->execute(); //執行
+	//================================
 	
-	
-	
-
-	
-	//http://www.runoob.com/mysql/mysql-insert-query.html
-	//https://github.com/hashman/hcvs_sample_code
-	//www.codedata.com.tw/database/mysql-tutorial-8-storage-engine-datatype/
-	//http://easonyo.pixnet.net/blog/post/22966510
 
 }
 ?>
